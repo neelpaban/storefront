@@ -1,0 +1,27 @@
+@keyframes ribbonScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.track {
+  display: flex;
+  white-space: nowrap;
+  animation: ribbonScroll 22s linear infinite;
+  will-change: transform;
+}
+
+.container {
+  overflow: hidden;
+  background: black;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.item {
+  padding: 0.75rem 2.5rem;
+  flex-shrink: 0;
+}
