@@ -74,7 +74,7 @@ export default function AddressModal({
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white p-8 w-[500px] rounded-sm space-y-4">
+      <div className="bg-white text-black w-full max-w-md rounded-2xl p-8 shadow-xl space-y-6">
 
         <h3 className="text-lg font-medium">
           {address ? "Edit Address" : "Add Address"}

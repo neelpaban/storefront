@@ -229,7 +229,7 @@ function ProductCard({ product }) {
 
       <div className="flex justify-between text-xs text-gray-500">
         <span>
-          Stock: <span className="font-semibold">{product.available_stock ?? 0}</span>
+         {/*  Stock: <span className="font-semibold">{product.available_stock ?? 0}</span> */}
         </span>
       </div>
 

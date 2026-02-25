@@ -10,6 +10,7 @@ import { loadRazorpay } from "@/lib/loadRazorpay";
 import { api } from "@/lib/api";
 
 const API = process.env.NEXT_PUBLIC_API_URL;
+
 export default function CartPage() {
 
   const router = useRouter();
@@ -18,13 +19,12 @@ export default function CartPage() {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
+  const [showCODConfirm, setShowCODConfirm] = useState(false);
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   const [loading, setLoading] = useState(true);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
-
-  /* ================= COUPON STATE ================= */
 
   const [couponCode, setCouponCode] = useState("");
   const [discountAmount, setDiscountAmount] = useState(0);
@@ -70,8 +70,6 @@ export default function CartPage() {
       sum + (item.is_gift === 1 ? 50 * Number(item.quantity) : 0),
     0
   );
-
-  
 
   const totalBeforeDiscount = subtotal + giftTotal;
   const finalTotal = totalBeforeDiscount - discountAmount;
@@ -170,18 +168,18 @@ export default function CartPage() {
       setCheckoutLoading(true);
       await loadRazorpay();
 
-      const data = await api(`${API}/api/checkout/create-order`, {
-  method: "POST",
-  body: JSON.stringify({
-    address_id: selectedAddress.id,
-    coupon_code: couponCode || null
-  })
-});
+      const data = await api(`/api/checkout/create-order`, {
+        method: "POST",
+        body: JSON.stringify({
+          address_id: selectedAddress.id,
+          coupon_code: couponCode || null
+        })
+      });
 
-if (!data?.success) {
-  alert(data?.message || "Checkout failed");
-  return;
-}
+      if (!data?.success) {
+        alert(data?.message || "Checkout failed");
+        return;
+      }
 
       const rzp = new window.Razorpay({
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
@@ -190,12 +188,10 @@ if (!data?.success) {
         currency: "INR",
         name: "Trinkets Jewellery",
         handler: async (response) => {
-
-          await api("/api/checkout/verify", {
+          await api(`/api/checkout/verify`, {
             method: "POST",
             body: JSON.stringify(response)
           });
-
           router.push(`/account/orders/${data.orderId}`);
         },
         theme: { color: "#9f1239" }
@@ -253,7 +249,6 @@ if (!data?.success) {
 
         <section className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12">
 
-          {/* ITEMS */}
           <div className="space-y-6">
             {cartItems.map(item => (
               <div
@@ -297,23 +292,21 @@ if (!data?.success) {
             <TrustSection />
           </div>
 
-          {/* SUMMARY */}
           <aside className="bg-white rounded-2xl p-8 shadow-sm border border-rose-100 sticky top-24">
             <h3 className="text-lg font-semibold text-rose-900 mb-6">
               Order Summary
             </h3>
 
-            <div className="flex justify-between text-sm mb-2">
+            <div className="flex justify-between text-sm mb-2 text-black">
               <span>Subtotal</span>
               <span>₹ {subtotal.toLocaleString()}</span>
             </div>
 
-            <div className="flex justify-between text-sm mb-2">
+            <div className="flex justify-between text-sm mb-2 text-black">
               <span>Gift Wrap</span>
               <span>₹ {giftTotal.toLocaleString()}</span>
             </div>
 
-            {/* COUPON */}
             <div className="border-t pt-6 mt-4">
               <div className="flex gap-2">
                 <input
@@ -337,23 +330,12 @@ if (!data?.success) {
                   {couponMessage}
                 </p>
               )}
-
-              {discountAmount > 0 && (
-                <div className="flex justify-between text-sm mt-4 text-green-600">
-                  <span>Discount</span>
-                  <span>- ₹ {discountAmount.toLocaleString()}</span>
-                </div>
-              )}
             </div>
 
-            <div className="border-t pt-4 mt-4 flex justify-between font-semibold text-lg">
+            <div className="border-t pt-4 mt-4 flex justify-between font-semibold text-lg text-black">
               <span>Total</span>
               <span>₹ {finalTotal.toLocaleString()}</span>
             </div>
-            <p className="text-xs text-gray-500 mt-2">
-  Inclusive of all taxes
-</p>
-
 
             <button
               onClick={() => setShowPaymentModal(true)}
@@ -370,8 +352,19 @@ if (!data?.success) {
       {showPaymentModal && (
         <PaymentModal
           close={() => setShowPaymentModal(false)}
-          handleCOD={handleCOD}
+          openCODConfirm={() => setShowCODConfirm(true)}
           handleRazorpay={handleRazorpay}
+        />
+      )}
+
+      {showCODConfirm && (
+        <CODConfirmModal
+          close={() => setShowCODConfirm(false)}
+          confirm={async () => {
+            setShowCODConfirm(false);
+            await handleCOD();
+          }}
+          loading={checkoutLoading}
         />
       )}
 
@@ -420,7 +413,7 @@ function TrustCard({ title, subtitle }) {
   );
 }
 
-function PaymentModal({ close, handleCOD, handleRazorpay }) {
+function PaymentModal({ close, openCODConfirm, handleRazorpay }) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white w-full max-w-md rounded-2xl p-8 space-y-6">
@@ -436,7 +429,7 @@ function PaymentModal({ close, handleCOD, handleRazorpay }) {
         </button>
 
         <button
-          onClick={() => { close(); handleCOD(); }}
+          onClick={() => { close(); openCODConfirm(); }}
           className="w-full border py-3 rounded-full text-sm"
         >
           Cash on Delivery
@@ -448,6 +441,40 @@ function PaymentModal({ close, handleCOD, handleRazorpay }) {
         >
           Cancel
         </button>
+      </div>
+    </div>
+  );
+}
+
+function CODConfirmModal({ close, confirm, loading }) {
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white w-full max-w-md rounded-2xl p-8 shadow-xl space-y-6">
+        <h2 className="text-xl font-semibold text-rose-900 text-center">
+          Confirm Cash on Delivery
+        </h2>
+
+        <p className="text-sm text-gray-600 text-center">
+          Are you sure you want to place this order using Cash on Delivery?
+        </p>
+
+        <div className="flex gap-4">
+          <button
+            onClick={close}
+            disabled={loading}
+            className="flex-1 border border-gray-300 py-3 rounded-full text-sm"
+          >
+            Cancel
+          </button>
+
+          <button
+            onClick={confirm}
+            disabled={loading}
+            className="flex-1 bg-rose-800 text-white py-3 rounded-full text-sm disabled:opacity-50"
+          >
+            {loading ? "Placing Order..." : "Yes, Place Order"}
+          </button>
+        </div>
       </div>
     </div>
   );

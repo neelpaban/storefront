@@ -56,7 +56,7 @@ console.log(order);
           <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
 
             <div>
-              <h1 className="text-3xl font-light tracking-wide">
+              <h1 className="text-3xl font-light tracking-wide text-black">
                 Order Confirmation
               </h1>
               <p className="text-gray-500 mt-2 text-sm">
@@ -65,10 +65,10 @@ console.log(order);
             </div>
 
             <div className="text-sm text-right">
-              <p className="text-gray-400">Order Number</p>
+             {/* <p className="text-gray-400">Order Number</p>
               <p className="font-medium text-lg">
                 #{order.order_number || order.id}
-              </p>
+              </p> */}
               <p className="text-gray-500 mt-1">
                 Placed on {new Date(order.created_at).toLocaleString()}
               </p>
@@ -86,12 +86,12 @@ console.log(order);
 
             <div>
               <p className="text-gray-400 text-sm">Order Status</p>
-              <p className="font-medium text-lg">{order.order_status}</p>
+              <p className="font-medium text-lg text-black">{order.order_status}</p>
             </div>
 
             <div>
               <p className="text-gray-400 text-sm">Payment</p>
-              <p className="font-medium">
+              <p className="font-medium text-black">
                 {order.payment_method} • {order.payment_status}
               </p>
             </div>
@@ -103,15 +103,15 @@ console.log(order);
             <div className="space-y-6">
 
               <div>
-                <p className="text-gray-400 text-sm">Courier</p>
-                <p className="font-medium">
+                <p className="text-gray-400 text-sm text-black">Courier</p>
+                <p className="font-medium text-black">
                   {order.courier.carrier_name}
                 </p>
               </div>
 
               <div>
-                <p className="text-gray-400 text-sm">Tracking Number</p>
-                <p className="font-medium">
+                <p className="text-gray-400 text-sm text-black">Tracking Number</p>
+                <p className="font-medium text-black">
                   {order.courier.tracking_number}
                 </p>
               </div>
@@ -128,10 +128,10 @@ console.log(order);
 
               {order.courier.estimated_delivery && (
                 <div>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-gray-400 text-sm text-black">
                     Estimated Delivery
                   </p>
-                  <p className="font-medium">
+                  <p className="font-medium text-black">
                     {new Date(
                       order.courier.estimated_delivery
                     ).toLocaleDateString()}
@@ -147,11 +147,11 @@ console.log(order);
         {/* ================= ORDER ITEMS ================= */}
         <div className="bg-white rounded-3xl shadow-sm p-10">
 
-          <h2 className="text-xl font-light mb-8">
+          <h2 className="text-xl font-light mb-8 text-black">
             Items in Your Order
           </h2>
 
-          <div className="space-y-8">
+          <div className="space-y-8 text-black">
 
             {Array.isArray(order.items) && order.items.map((item) => (
               <div
@@ -201,7 +201,7 @@ console.log(order);
         </div>
 
         {/* ================= SHIPPING DETAILS ================= */}
-        <div className="bg-white rounded-3xl shadow-sm p-10 grid md:grid-cols-2 gap-10">
+        <div className="bg-white rounded-3xl shadow-sm p-10 grid md:grid-cols-2 gap-10 text-black">
 
           {/* SHIPPING ADDRESS */}
           <div>

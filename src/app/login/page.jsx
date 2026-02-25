@@ -2,9 +2,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { api } from "@/lib/api";
 
 export default function LoginPage() {
@@ -12,6 +13,8 @@ export default function LoginPage() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const searchParams = useSearchParams();
+const resetSuccess = searchParams.get("reset") === "success";
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -80,7 +83,11 @@ export default function LoginPage() {
         {/* RIGHT PANEL */}
         <div className="flex items-center justify-center bg-rose-50 px-6">
           <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-10">
-
+{resetSuccess && (
+  <div className="bg-green-100 text-green-700 p-3 rounded-lg text-sm mb-4">
+    Password reset successful. Please login.
+  </div>
+)}
             <h2 className="text-2xl font-light mb-2">
               Sign In
             </h2>
@@ -111,6 +118,7 @@ export default function LoginPage() {
                 required
                 className="w-full border rounded-xl px-4 py-3 text-sm"
               />
+              
 
               <button
                 type="submit"
@@ -122,7 +130,7 @@ export default function LoginPage() {
 
             </form>
 
-            <p className="mt-6 text-sm text-gray-600 text-center">
+            <p className="mt-6 text-sm text-black-600 text-center">
               New here?{" "}
               <a
                 href="/register"
@@ -131,6 +139,13 @@ export default function LoginPage() {
                 Create account
               </a>
             </p>
+
+            <Link
+  href="/forgot-password"
+  className="text-sm text-black-600 hover:text-black transition text-center mt-2 block"
+>
+  Forgot Password?
+</Link>
 
           </div>
         </div>
