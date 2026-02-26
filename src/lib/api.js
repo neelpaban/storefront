@@ -1,5 +1,4 @@
 // trinkets/storefront/src/lib/api.js
-// trinkets/storefront/src/lib/api.js
 
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_API_URL;
