@@ -9,7 +9,8 @@ export async function api(path, options = {}) {
       path.startsWith("http")
         ? path
         : `${BACKEND_URL}${path}`;
-
+        console.log("API BASE:", process.env.NEXT_PUBLIC_API_URL);
+console.log("API CALLING:", url);
     const res = await fetch(url, {
       next: { revalidate: 60 },
       credentials: "include",
