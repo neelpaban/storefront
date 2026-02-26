@@ -1,6 +1,6 @@
 // storefront/src/middleware.js
 import { NextResponse } from "next/server";
-
+const API_URL= process.env.API_URL;
 export async function middleware(req) {
   const { pathname } = req.nextUrl;
 console.log("MIDDLEWARE HIT:", pathname);
@@ -43,9 +43,9 @@ const sessionCookie = req.cookies.get("trinkets.sid");
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/system/status`,
-      { cache: "no-store" }
-    );
+  `${API_URL}/api/system/status`,
+  { cache: "no-store" }
+);
 
     if (res.ok) {
       const data = await res.json();
