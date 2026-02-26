@@ -8,7 +8,7 @@ export default function ProductSpecifications({ specifications }) {
   if (!specifications?.length) return null;
 
   return (
-    <section className="text-xl font-bold text-[#1a1a1a] mb-6">
+    <section className="text-xl font-extrabold text-[#1a1a1a] mb-6">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex justify-between items-center text-xl font-medium"
@@ -27,7 +27,7 @@ export default function ProductSpecifications({ specifications }) {
         <div className="grid grid-cols-2 gap-6 text-sm text-gray-600">
           {specifications.map((spec) => (
             <div key={spec.id}>
-              <p className="text-gray-400">{spec.spec_key}</p>
+              <p className="text-[#f27e97]">{spec.spec_key}</p>
               <p className="font-medium">{spec.spec_value}</p>
             </div>
           ))}

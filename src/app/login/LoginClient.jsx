@@ -87,10 +87,10 @@ const resetSuccess = searchParams.get("reset") === "success";
     Password reset successful. Please login.
   </div>
 )}
-            <h2 className="text-2xl font-light mb-2">
+            <h2 className="text-2xl text-[#eb2852] font-light mb-2">
               Sign In
             </h2>
-            <p className="text-sm text-gray-500 mb-8">
+            <p className="text-sm text-black mb-8">
               Access your account
             </p>
 
@@ -107,7 +107,7 @@ const resetSuccess = searchParams.get("reset") === "success";
                 type="email"
                 placeholder="you@example.com"
                 required
-                className="w-full border rounded-xl px-4 py-3 text-sm"
+                className="w-full border rounded-xl px-4 py-3 text-sm text-black"
               />
 
               <input
@@ -115,7 +115,7 @@ const resetSuccess = searchParams.get("reset") === "success";
                 type="password"
                 placeholder="••••••••"
                 required
-                className="w-full border rounded-xl px-4 py-3 text-sm"
+                className="w-full border rounded-xl px-4 py-3 text-sm text-black"
               />
               
 
@@ -129,7 +129,7 @@ const resetSuccess = searchParams.get("reset") === "success";
 
             </form>
 
-            <p className="mt-6 text-sm text-black-600 text-center">
+            <p className="mt-6 text-sm text-black text-center">
               New here?{" "}
               <a
                 href="/register"
@@ -141,7 +141,7 @@ const resetSuccess = searchParams.get("reset") === "success";
 
             <Link
   href="/forgot-password"
-  className="text-sm text-black-600 hover:text-black transition text-center mt-2 block"
+  className="text-sm text-black-600 text-black transition text-center mt-2 block"
 >
   Forgot Password?
 </Link>

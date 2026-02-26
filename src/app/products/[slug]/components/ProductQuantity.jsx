@@ -61,7 +61,8 @@ export default function ProductQuantity({
           +
         </button>
 
-        {/* Availability */}
+       {/* Availability */}
+       {/*
         <span
           className={`
             text-xs font-medium
@@ -76,7 +77,7 @@ export default function ProductQuantity({
             ? `${available} available`
             : "Out of stock"}
         </span>
-
+*/} 
       </div>
     </div>
   );

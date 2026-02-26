@@ -67,7 +67,7 @@ export default function CartPage() {
 
   const giftTotal = cartItems.reduce(
     (sum, item) =>
-      sum + (item.is_gift === 1 ? 50 * Number(item.quantity) : 0),
+      sum + (item.is_gift === 1 ? 100 * Number(item.quantity) : 0),
     0
   );
 

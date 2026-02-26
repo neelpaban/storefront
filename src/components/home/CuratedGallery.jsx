@@ -22,6 +22,20 @@ const [active, setActive] = useState(
   total > 0 ? Math.floor(total / 2) : 0
 );
 
+
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const checkScreen = () => {
+    setIsMobile(window.innerWidth < 640);
+  };
+
+  checkScreen(); // initial check
+  window.addEventListener("resize", checkScreen);
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
+
+
   if (!Array.isArray(media) || total === 0) return null;
 
   /* ================= NAVIGATION ================= */
@@ -61,23 +75,23 @@ const [active, setActive] = useState(
       </div>
 
       {/* ===== SLIDER ===== */}
-      <div className="relative h-[640px] w-full">
+      <div className="relative h-[320px] sm:h-[540px] md:h-[640px] w-full">
 
         {/* LEFT ARROW */}
         <button
           onClick={prev}
-          className="absolute left-6 md:left-12 top-1/3 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:scale-110 transition"
+          className="absolute left-6 md:left-12 top-1/3 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-2 sm:p-4 hover:scale-110 transition"
         >
-          <ChevronLeftIcon className="w-6 h-6" />
+          <ChevronLeftIcon className="w-4 h-4 sm:w-6 sm:h-6" />
         </button>
 
         {/* RIGHT ARROW */}
         <button
           onClick={next}
-          className="absolute right-6 md:right-12 top-1/3 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:scale-110 transition"
+          className="absolute right-6 md:right-12 top-1/3 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-2 sm:p-4 hover:scale-110 transition"
 
         >
-          <ChevronRightIcon className="w-6 h-6" />
+          <ChevronRightIcon className="w-4 h-4 sm:w-6 sm:h-6" />
         </button>
 
         {/* ===== CARDS STACK ===== */}
@@ -95,20 +109,22 @@ const abs = Math.abs(offset);
 if (abs > 3) return null;
 
 
-            return (
-              <GalleryCard
-                key={index}
-                item={item}
-                active={offset === 0}
-                style={{
-                  transform: `
-    translateX(${offset * 260}px)
-    scale(${1 - abs * 0.12})
-  `,
-                  zIndex: 10 - abs,
-                }}
-              />
-            );
+            const spacing = isMobile ? 180 : 260;
+
+return (
+  <GalleryCard
+    key={index}
+    item={item}
+    active={offset === 0}
+    style={{
+      transform: `
+        translateX(${offset * spacing}px)
+        scale(${1 - abs * 0.12})
+      `,
+      zIndex: 10 - abs,
+    }}
+  />
+);
           })}
         </div>
       </div>
@@ -123,8 +139,8 @@ function GalleryCard({ item, active, style }) {
     <div
       className="
         absolute
-        w-[400px]
-        h-[560px]
+        w-[260px] sm:w-[320px] md:w-[360px]
+h-[400px] sm:h-[460px] md:h-[520px]
         rounded-2xl
         overflow-hidden
         shadow-2xl

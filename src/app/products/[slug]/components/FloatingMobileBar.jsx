@@ -105,7 +105,7 @@ export default function FloatingMobileBar({
             ${
               available === 0
                 ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                : "bg-[#9c3a4a] text-white hover:opacity-90 active:scale-95"
+                : "bg-[#eb2852] text-white hover:opacity-90 active:scale-95"
             }
           `}
         >

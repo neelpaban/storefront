@@ -1,12 +1,13 @@
+// storefront/src/app/products/[slug]/components/ProductPricing.jsx
 "use client";
 
 import useAnimatedNumber from "./AnimatedNumber";
 
-export default function ProductPricing({ price = 0, qty = 1 }) {
+export default function ProductPricing({ price = 0 }) {
   const basePrice = Number(price) || 0;
-  const finalPrice = basePrice * qty;
 
-  const animated = useAnimatedNumber(finalPrice);
+  // Always animate only the unit price (NOT quantity-based)
+  const animated = useAnimatedNumber(basePrice);
 
   const mrp = Math.round(basePrice * 1.6);
   const discount =

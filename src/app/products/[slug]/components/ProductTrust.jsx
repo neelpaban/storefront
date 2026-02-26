@@ -8,10 +8,10 @@ import {
 export default function ProductTrust() {
   return (
     <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
-      <Trust icon={ArrowPathIcon} label="Easy 15 Day Return" />
-      <Trust icon={ShieldCheckIcon} label="Lifetime Plating" />
-      <Trust icon={TruckIcon} label="6-Month Warranty" />
-      <Trust icon={CheckBadgeIcon} label="Fine 925 Silver" />
+      <Trust icon={ArrowPathIcon} label="Easy 20 Day Return" />
+      <Trust icon={ShieldCheckIcon} label="18K Gold Plated" />
+      <Trust icon={TruckIcon} label="1-Year Warranty" />
+      <Trust icon={CheckBadgeIcon} label="316L Stainless Steel" />
     </div>
   );
 }

@@ -10,7 +10,7 @@ export default function OfferRibbon({ data = {} }) {
   if (!Array.isArray(items) || items.length === 0) return null;
 
   return (
-    <div className="w-full bg-black text-white overflow-hidden">
+    <div className="w-full h-6 md:h-8 bg-black text-white overflow-hidden flex items-center">
       <div
         ref={containerRef}
         className="flex whitespace-nowrap animate-offer-scroll"

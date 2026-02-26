@@ -19,8 +19,20 @@ export default function CategoryGrid({ data = {} }) {
   const [active, setActive] = useState(
     total > 0 ? Math.floor(total / 2) : 0
   );
+//
+  const [isMobile, setIsMobile] = useState(false);
 
+useEffect(() => {
+  const checkScreen = () => {
+    setIsMobile(window.innerWidth < 640);
+  };
 
+  checkScreen(); // initial check
+  window.addEventListener("resize", checkScreen);
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
+
+//
 
   if (!Array.isArray(categories) || total === 0) return null;
 
@@ -61,7 +73,7 @@ export default function CategoryGrid({ data = {} }) {
       </div>
 
       {/* ===== SLIDER WRAPPER ===== */}
-      <div className="relative h-[620px] w-full">
+      <div className="relative h-[320px] sm:h-[540px] md:h-[640px] w-full">
 
         {/* LEFT ARROW */}
         <button
@@ -104,21 +116,22 @@ export default function CategoryGrid({ data = {} }) {
             if (!mediaItem) return null;
 
 
-            return (
-              <CategoryCard
-                key={index}
-                category={cat}
-                active={offset === 0}
-                style={{
-                  transform: `
-    translateX(${offset * 260}px)
-    scale(${1 - abs * 0.12})
-  `,
-                  zIndex: 10 - abs,
-                }}
+            const spacing = isMobile ? 180 : 260;
 
-              />
-            );
+return (
+  <CategoryCard
+    key={index}
+    category={cat}
+    active={offset === 0}
+    style={{
+      transform: `
+        translateX(${offset * spacing}px)
+        scale(${1 - abs * 0.12})
+      `,
+      zIndex: 10 - abs,
+    }}
+  />
+);
           })}
         </div>
       </div>
@@ -136,8 +149,8 @@ function CategoryCard({ category, active, style }) {
       href={category.link}
       className="
         absolute
-        w-[340px]
-        h-[580px]
+        w-[260px] sm:w-[320px] md:w-[360px]
+h-[400px] sm:h-[460px] md:h-[520px]
         rounded-2xl
         overflow-hidden
         shadow-2xl

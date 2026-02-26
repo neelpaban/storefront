@@ -82,7 +82,7 @@ export default function HeroSection({ data = {} }) {
 
 
   return (
-    <section className="relative w-full h-[60vh] md:h-[72vh] overflow-hidden bg-black">
+    <section className="relative w-full h-[22svh] md:h-[72vh] overflow-hidden bg-black">
 
       {/* ===== SLIDER TRACK ===== */}
       <div
@@ -111,7 +111,7 @@ export default function HeroSection({ data = {} }) {
             )}
 
             {/* ===== OVERLAY CONTENT ===== */}
-            <div className="absolute inset-0 flex items-center"> {/* bg-black/40 */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-center"> {/* bg-black/40 */}
               <div className="max-w-7xl mx-auto px-6 text-white">
 
                 {banner.title && (

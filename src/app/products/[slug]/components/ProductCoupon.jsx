@@ -4,7 +4,7 @@ export default function ProductCoupon({ discount, coupon }) {
       <span className="font-semibold text-[#1a1a1a]">
        {/*EXTRA {discount}% OFF*/} EXTRA 10% OFF
       </span>
-      <span className="font-semibold text-gray-900">
+      <span className="font-semibold text-[#e02f56]">
         with coupon <b>{coupon}</b>
       </span>
     </div>

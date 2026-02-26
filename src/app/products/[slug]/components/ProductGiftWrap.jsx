@@ -26,7 +26,7 @@ export default function ProductGiftWrap({
         </span>{" "}
         🎁 Wrap it for just{" "}
         <span className="font-semibold text-[#7b2d3a]">
-          ₹50
+          ₹100
         </span>
       </label>
 
