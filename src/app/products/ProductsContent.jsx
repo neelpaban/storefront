@@ -179,7 +179,7 @@ export default function ProductsPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {normalized.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -197,12 +197,12 @@ export default function ProductsPage() {
 
 function ProductCard({ product }) {
   return (
-    <div className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition relative">
+    <div className="group bg-white rounded-2xl p-3 shadow-sm hover:shadow-lg transition relative">
 
       <WishlistButton productId={product.id} />
 
       <Link href={`/products/${product.slug}`}>
-        <div className="aspect-square bg-gray-100 rounded-xl mb-5 overflow-hidden relative">
+        <div className="aspect-square bg-gray-100 rounded-xl mb-5 md:mb-5 overflow-hidden relative">
 
           {/* FIRST IMAGE */}
           <img
