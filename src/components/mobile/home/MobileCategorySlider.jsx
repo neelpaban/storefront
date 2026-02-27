@@ -30,7 +30,7 @@ export default function MobileCategorySlider({ data = {} }) {
           return (
             <Link
               key={index}
-              href={cat.link}
+              href={`/products?category=${cat.slug || cat.link}`}
               className="flex flex-col items-center flex-shrink-0"
             >
               {/* Circle */}
