@@ -64,7 +64,7 @@ const mrp = product.mrp ?? Math.round(price * 1.6);
 const discount =
   mrp > 0 ? Math.round(((mrp - price) / mrp) * 100) : 0;
 
-const coupon = "WELCOME10";
+const coupon = "WELCOME20";
 
 const available = inventory?.available ?? 0;
 
