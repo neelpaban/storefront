@@ -87,7 +87,7 @@ export default function FloatingMobileBar({
 
           {giftWrap && (
             <span className="text-xs text-[#7b2d3a]">
-              Includes ₹50 gift wrap
+              Includes ₹100 gift wrap
             </span>
           )}
         </div>

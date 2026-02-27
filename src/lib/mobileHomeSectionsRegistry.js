@@ -5,7 +5,7 @@ import MobileCategorySlider from "@/components/mobile/home/MobileCategorySlider"
 import MobileRecommendation from "@/components/mobile/home/MobileRecommendation";
 import VideoBannerSection from "@/components/desktop/home/VideoBannerSection";
 import CuratedGallery from "@/components/desktop/home/CuratedGallery";
-import TrustSection from "@/components/desktop/home/TrustSection";
+
 
 // You can expand later for other sections
 
