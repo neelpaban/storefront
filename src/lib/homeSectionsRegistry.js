@@ -1,14 +1,14 @@
 // trinkets/storefront/src/lib/homeSectionsRegistry.js
-import HeroSection from "@/components/home/HeroSection";
-import OfferRibbon from "@/components/home/OfferRibbon";
-import SplitFeaturedSection from "@/components/home/SplitFeaturedSection";
-import ThreeBannerMosaic from "@/components/home/ThreeBannerMosaic";
-import CategoryGrid from "@/components/home/CategoryGrid";
-import VideoBannerSection from "@/components/home/VideoBannerSection";
-import TrustSection from "@/components/home/TrustSection";
-import PromoBannerGrid from "@/components/home/PromoBannerGrid";
-import SpecialCollection from "@/components/home/SpecialCollection";
-import CuratedGallery from "@/components/home/CuratedGallery";
+import HeroSection from "@/components/desktop/home/HeroSection";
+import OfferRibbon from "@/components/desktop/home/OfferRibbon";
+import SplitFeaturedSection from "@/components/desktop/home/SplitFeaturedSection";
+import ThreeBannerMosaic from "@/components/desktop/home/ThreeBannerMosaic";
+import CategoryGrid from "@/components/desktop/home/CategoryGrid";
+import VideoBannerSection from "@/components/desktop/home/VideoBannerSection";
+import TrustSection from "@/components/desktop/home/TrustSection";
+import PromoBannerGrid from "@/components/desktop/home/PromoBannerGrid";
+import SpecialCollection from "@/components/desktop/home/SpecialCollection";
+import CuratedGallery from "@/components/desktop/home/CuratedGallery";
 
 
 export const HOME_SECTIONS = {

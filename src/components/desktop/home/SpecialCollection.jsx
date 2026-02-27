@@ -1,4 +1,4 @@
-// components/home/SpecialCollection.jsx
+// storefront/src/components/desktop/home/SpecialCollection.jsx
 const MEDIA_BASE = process.env.NEXT_PUBLIC_MEDIA_URL || "";
 
 function SpecialItem({ title, price, media }) {

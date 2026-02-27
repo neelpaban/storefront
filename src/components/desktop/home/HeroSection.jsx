@@ -1,4 +1,4 @@
-// storefront/src/components/home/HeroSection.jsx
+// storefront/src/components/desktop/home/HeroSection.jsx
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
@@ -111,7 +111,7 @@ export default function HeroSection({ data = {} }) {
             )}
 
             {/* ===== OVERLAY CONTENT ===== */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-center"> {/* bg-black/40 */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-center"> {/* bg-black/40 */}
               <div className="max-w-7xl mx-auto px-6 text-white">
 
                 {banner.title && (

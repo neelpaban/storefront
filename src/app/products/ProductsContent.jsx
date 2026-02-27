@@ -1,12 +1,13 @@
+// storefront/src/app/products/ProductsContent.jsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import HeroSection from "@/components/home/HeroSection";
-import WishlistButton from "@/components/common/WishlistButton";
+import Header from "@/components/shared/layout/Header";
+import Footer from "@/components/shared/layout/Footer";
+import HeroSection from "@/components/desktop/home/HeroSection";
+import WishlistButton from "@/components/shared/ui/WishlistButton";
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 const MEDIA = process.env.NEXT_PUBLIC_MEDIA_URL || process.env.NEXT_PUBLIC_API_URL;
@@ -110,8 +111,9 @@ export default function ProductsPage() {
   return (
     <>
       <Header />
+      {/*
       {heroData && <HeroSection data={heroData} />}
-
+*/}
       <main className="bg-[#f6f6f6]">
         <div className="max-w-7xl mx-auto px-6 py-16">
 

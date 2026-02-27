@@ -3,8 +3,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/components/shared/layout/Header";
+import Footer from "@/components/shared/layout/Footer";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { loadRazorpay } from "@/lib/loadRazorpay";
 import { api } from "@/lib/api";

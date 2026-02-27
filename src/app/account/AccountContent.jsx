@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/components/shared/layout/Header";
+import Footer from "@/components/shared/layout/Footer";
 import { useAccount } from "@/hooks/useAccount";
-import AddressModal from "@/components/account/AddressModal";
-import ProfileModal from "@/components/account/ProfileModal";
+import AddressModal from "@/components/desktop/account/AddressModal";
+import ProfileModal from "@/components/desktop/account/ProfileModal";
 import Link from "next/link";
 
 export default function AccountContent() {
