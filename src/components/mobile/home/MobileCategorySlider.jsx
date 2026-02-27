@@ -21,7 +21,7 @@ export default function MobileCategorySlider({ data = {} }) {
       </h3>
 
       {/* Horizontal Scroll */}
-      <div className="flex gap-6 px-4 overflow-x-auto scrollbar-hide">
+      <div className="flex gap-6 px-4 overflow-x-auto no-scrollbar">
 
         {categories.map((cat, index) => {
           const mediaItem = cat.media?.[0];

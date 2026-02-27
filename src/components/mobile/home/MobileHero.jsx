@@ -73,7 +73,7 @@ export default function MobileHero({ data = {} }) {
                 />
               )}
 
-              <div className="absolute inset-0 bg-black/25" />
+             {/* <div className="absolute inset-0 bg-black/25" /> */}
             </div>
           ))}
         </div>
