@@ -1,7 +1,7 @@
 // storefront/src/components/home/CuratedGallery.jsx
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 const MEDIA_BASE = process.env.NEXT_PUBLIC_MEDIA_URL || "";
@@ -13,27 +13,31 @@ export default function CuratedGallery({ data = {} }) {
     media = [],
   } = data;
 
- // const [active, setActive] = useState(0);
+  // const [active, setActive] = useState(0);
 
   const total = media.length;
 
-  
-const [active, setActive] = useState(
-  total > 0 ? Math.floor(total / 2) : 0
-);
 
-
-const [isMobile, setIsMobile] = useState(false);
+  const [active, setActive] = useState(0);
 
 useEffect(() => {
-  const checkScreen = () => {
-    setIsMobile(window.innerWidth < 640);
-  };
+  if (media.length > 0) {
+    setActive(Math.floor(media.length / 2));
+  }
+}, [media]);
 
-  checkScreen(); // initial check
-  window.addEventListener("resize", checkScreen);
-  return () => window.removeEventListener("resize", checkScreen);
-}, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    checkScreen(); // initial check
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
 
   if (!Array.isArray(media) || total === 0) return null;
@@ -99,32 +103,32 @@ useEffect(() => {
           {media.map((item, index) => {
             let offset = index - active;
 
-// Circular wrap logic
-if (offset > total / 2) offset -= total;
-if (offset < -total / 2) offset += total;
+            // Circular wrap logic
+            if (offset > total / 2) offset -= total;
+            if (offset < -total / 2) offset += total;
 
-const abs = Math.abs(offset);
+            const abs = Math.abs(offset);
 
-// performance guard
-if (abs > 3) return null;
+            // performance guard
+            if (abs > 4) return null;
 
 
             const spacing = isMobile ? 180 : 260;
 
-return (
-  <GalleryCard
-    key={index}
-    item={item}
-    active={offset === 0}
-    style={{
-      transform: `
+            return (
+              <GalleryCard
+                key={item.id || item.url || index}
+                item={item}
+                active={offset === 0}
+                style={{
+                  transform: `
         translateX(${offset * spacing}px)
         scale(${1 - abs * 0.12})
       `,
-      zIndex: 10 - abs,
-    }}
-  />
-);
+                  zIndex: 10 - abs,
+                }}
+              />
+            );
           })}
         </div>
       </div>
@@ -135,12 +139,25 @@ return (
 /* ================= CARD ================= */
 
 function GalleryCard({ item, active, style }) {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    if (active) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0; // optional reset
+    }
+  }, [active]);
+
   return (
     <div
       className="
         absolute
         w-[260px] sm:w-[320px] md:w-[360px]
-h-[400px] sm:h-[460px] md:h-[520px]
+        h-[400px] sm:h-[460px] md:h-[520px]
         rounded-2xl
         overflow-hidden
         shadow-2xl
@@ -150,14 +167,14 @@ h-[400px] sm:h-[460px] md:h-[520px]
       "
       style={style}
     >
-      {/* MEDIA */}
       {item.type === "video" ? (
         <video
+          ref={videoRef}
           src={`${MEDIA_BASE}${item.url}`}
           muted
           loop
           playsInline
-          autoPlay={active}
+          preload="auto"
           className="w-full h-full object-cover"
         />
       ) : (
@@ -168,18 +185,12 @@ h-[400px] sm:h-[460px] md:h-[520px]
         />
       )}
 
-      {/* OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-      {/* INFO */}
       {item.title && (
         <div className="absolute bottom-6 left-6 right-6 text-white">
-          <p className="text-sm opacity-80">
-            {item.subtitle}
-          </p>
-          <h3 className="text-lg font-medium mt-1">
-            {item.title}
-          </h3>
+          <p className="text-sm opacity-80">{item.subtitle}</p>
+          <h3 className="text-lg font-medium mt-1">{item.title}</h3>
 
           {item.ctaLink && (
             <a
