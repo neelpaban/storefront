@@ -16,7 +16,7 @@ export default function VideoBannerSection({ data = {} }) {
   if (!heading || !video) return null;
 
   return (
-    <section className="relative w-full h-[50vh] sm:h-[80vh] overflow-hidden bg-white">
+    <section className="relative w-full h-[45vh] sm:h-[80vh] overflow-hidden bg-white">
 
       {/* ===== VIDEO ===== */}
       <video

@@ -110,8 +110,10 @@ export default function HeroSection({ data = {} }) {
               />
             )}
 
-            {/* ===== OVERLAY CONTENT ===== */}
+            {/* ===== OVERLAY CONTENT ===== 
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-center"> {/* bg-black/40 */}
+            <div className="absolute inset-0 flex items-center">
+
               <div className="max-w-7xl mx-auto px-6 text-white">
 
                 {banner.title && (
