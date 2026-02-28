@@ -314,7 +314,7 @@ export default function CartPage() {
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
                   placeholder="Enter coupon code"
-                  className="flex-1 border rounded-full px-4 py-2 text-sm"
+                  className="flex-1 border rounded-full px-4 py-2 text-black text-sm"
                 />
                 <button
                   onClick={applyCoupon}
@@ -417,7 +417,7 @@ function PaymentModal({ close, openCODConfirm, handleRazorpay }) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white w-full max-w-md rounded-2xl p-8 space-y-6">
-        <h2 className="text-xl font-medium text-center">
+        <h2 className="text-xl font-medium text-center text-black">
           Select Payment Method
         </h2>
 
@@ -430,7 +430,7 @@ function PaymentModal({ close, openCODConfirm, handleRazorpay }) {
 
         <button
           onClick={() => { close(); openCODConfirm(); }}
-          className="w-full border py-3 rounded-full text-sm"
+          className="w-full border py-3 text-black rounded-full text-sm"
         >
           Cash on Delivery
         </button>

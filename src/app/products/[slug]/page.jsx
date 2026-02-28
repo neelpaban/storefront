@@ -37,57 +37,57 @@ export default function ProductPage() {
 
 
   useEffect(() => {
-  fetch(`${API}/api/products/${slug}`, {
-    credentials: "include",
-  })
-    .then(res => res.json())
-    .then(json => {
-      console.log("FULL PRODUCT DATA:", json);
-      console.log("SIMILAR PRODUCTS:", json.similarProducts);
-
-      setData(json);
-      setLoading(false);
+    fetch(`${API}/api/products/${slug}`, {
+      credentials: "include",
     })
-    .catch((err) => {
-      console.error("PRODUCT FETCH ERROR:", err);
-      setLoading(false);
-    });
-}, [slug]);
+      .then(res => res.json())
+      .then(json => {
+        console.log("FULL PRODUCT DATA:", json);
+        console.log("SIMILAR PRODUCTS:", json.similarProducts);
+
+        setData(json);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("PRODUCT FETCH ERROR:", err);
+        setLoading(false);
+      });
+  }, [slug]);
 
   if (loading) return <div className="py-40 text-center">Loading...</div>;
   if (!data) return <div className="py-40 text-center">Product not found</div>;
 
   const { product, images, inventory } = data;
   const price = Number(product.total_price || 0);
-const mrp = product.mrp ?? Math.round(price * 1.6);
+  const mrp = product.mrp ?? Math.round(price * 1.6);
 
-const discount =
-  mrp > 0 ? Math.round(((mrp - price) / mrp) * 100) : 0;
+  const discount =
+    mrp > 0 ? Math.round(((mrp - price) / mrp) * 100) : 0;
 
-const coupon = "WELCOME20";
+  const coupon = "WELCOME20";
 
-const available = inventory?.available ?? 0;
+  const available = inventory?.available ?? 0;
 
-function getDeliveryWindow() {
-  const today = new Date();
+  function getDeliveryWindow() {
+    const today = new Date();
 
-  const start = new Date(today);
-  start.setDate(today.getDate() + 3);
+    const start = new Date(today);
+    start.setDate(today.getDate() + 3);
 
-  const end = new Date(today);
-  end.setDate(today.getDate() + 4);
+    const end = new Date(today);
+    end.setDate(today.getDate() + 4);
 
-  const options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  };
+    const options = {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    };
 
-  return `${start.toLocaleDateString("en-IN", options)} – ${end.toLocaleDateString("en-IN", options)}`;
-}
+    return `${start.toLocaleDateString("en-IN", options)} – ${end.toLocaleDateString("en-IN", options)}`;
+  }
 
-const deliveryDate =
-  data.delivery?.estimated_date || getDeliveryWindow();
+  const deliveryDate =
+    data.delivery?.estimated_date || getDeliveryWindow();
 
 
 
@@ -99,74 +99,76 @@ const deliveryDate =
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-20 
 grid grid-cols-1 lg:grid-cols-[45%_55%] gap-10 lg:gap-20">
 
-          <ProductGallery images={images} product={product} />
+          <div className="lg:sticky lg:top-28 h-fit">
+            <ProductGallery images={images} product={product} />
+          </div>
 
           <div className="space-y-8">
 
-  <ProductPricing
-    price={price}
-    mrp={mrp}
-    qty={qty}
-  />
+            <ProductPricing
+              price={price}
+              mrp={mrp}
+              qty={qty}
+            />
 
-  <ProductTitle product={product} />
+            <ProductTitle product={product} />
 
-  <ProductCoupon
-    discount={discount}
-    coupon={coupon}
-  />
+            <ProductCoupon
+              discount={discount}
+              coupon={coupon}
+            />
 
-  <ProductQuantity
-    qty={qty}
-    setQty={setQty}
-    available={available}
-  />
+            <ProductQuantity
+              qty={qty}
+              setQty={setQty}
+              available={available}
+            />
 
-  <ProductDeliveryBox
-    deliveryDate={deliveryDate}
-  />
+            <ProductDeliveryBox
+              deliveryDate={deliveryDate}
+            />
 
-  <ProductGiftWrap
-    giftWrap={giftWrap}
-    setGiftWrap={setGiftWrap}
-  />
+            <ProductGiftWrap
+              giftWrap={giftWrap}
+              setGiftWrap={setGiftWrap}
+            />
 
-  <ProductTrust />
+            <ProductTrust />
 
-  <ProductActions
-    productId={product.id}
-    qty={qty}
-    available={available}
-    giftWrap={giftWrap}
-  />
+            <ProductActions
+              productId={product.id}
+              qty={qty}
+              available={available}
+              giftWrap={giftWrap}
+            />
 
-  <ProductDescription description={product.description} />
+            <ProductDescription description={product.description} />
 
-  <ProductCraft details={data.details} />
+            <ProductCraft details={data.details} />
 
-  <ProductSpecifications specifications={data.specifications} />
+            <ProductSpecifications specifications={data.specifications} />
 
-  <ProductFeatures features={data.features} />
+            <ProductFeatures features={data.features} />
 
-  
 
-  <ProductCare details={data.details} />
 
-  <ProductReviews productId={product.id} />
-  <SimilarProductsSection products={data.similarProducts} />
-  
-<FloatingMobileBar
-  productId={product.id}
-  price={price}
-  qty={qty}
-  available={available}
-  giftWrap={giftWrap}
-/>
-</div>
+            <ProductCare details={data.details} />
+
+            <ProductReviews productId={product.id} />
+            <SimilarProductsSection products={data.similarProducts} />
+
+            <FloatingMobileBar
+              productId={product.id}
+              price={price}
+              qty={qty}
+              available={available}
+              giftWrap={giftWrap}
+            />
+          </div>
 
         </div>
       </main>
-      
+
 
       <Footer />
     </>
