@@ -1,3 +1,4 @@
+// storefront/src/app/products/[slug]/components/ProductGallery.jsx
 "use client";
 
 import { useState } from "react";
@@ -8,7 +9,7 @@ export default function ProductGallery({ images, product }) {
   const [active, setActive] = useState(0);
 
   return (
-    <aside className="relative lg:sticky lg:top-24 self-start">
+    <aside className="lg:sticky lg:top-24 self-start">
       <div className="bg-white rounded-3xl shadow-sm p-4 transition hover:shadow-lg">
 
         <div className="aspect-square bg-gray-50 rounded-2xl overflow-hidden relative group">

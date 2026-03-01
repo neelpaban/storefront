@@ -5,6 +5,7 @@ import "./globals.css";
 
 import MobileLayout from "@/layouts/MobileLayout";
 import DesktopLayout from "@/layouts/DesktopLayout";
+import DisableZoom from "@/components/DisableZoom"; // 👈 ADD THIS
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,8 +22,16 @@ export const metadata = {
   description: "Luxury Jewellery Store",
 };
 
+/* ✅ STRICT VIEWPORT CONTROL */
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default async function RootLayout({ children }) {
-  const headerList = await headers();   // ✅ MUST await
+  const headerList = await headers();
   const userAgent = headerList.get("user-agent") || "";
   const isMobile = /android|iphone|ipod|mobile/i.test(userAgent);
 
@@ -31,6 +40,9 @@ export default async function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* 🔒 Strict Zoom Blocker */}
+        <DisableZoom />
+
         {isMobile ? (
           <MobileLayout>{children}</MobileLayout>
         ) : (

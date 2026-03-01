@@ -56,7 +56,7 @@ export default function AccountContent() {
 
         {/* HEADER */}
         <section>
-          <h1 className="text-3xl font-light">My Account</h1>
+          <h1 className="text-3xl text-black font-light">My Account</h1>
           <p className="mt-2 text-gray-600">
             Manage your orders, saved jewellery, and personal details.
           </p>
@@ -64,10 +64,10 @@ export default function AccountContent() {
 
         {/* ORDERS */}
 <section>
-  <h2 className="text-2xl font-light">Recent Orders</h2>
+  <h2 className="text-2xl text-black font-light">Recent Orders</h2>
 
   {orders.length === 0 ? (
-    <div className="mt-6 border rounded-sm p-6 text-sm text-gray-600">
+    <div className="mt-6 border rounded-sm p-6 text-sm text-black">
       No orders yet.
     </div>
   ) : (
@@ -84,7 +84,7 @@ export default function AccountContent() {
             <div className="space-y-4">
 
               <div>
-                <p className="font-medium text-sm">
+                <p className="font-medium text-black text-sm">
                   Order #{o.order_number || o.id}
                 </p>
                 <p className="text-xs text-gray-500">
@@ -107,7 +107,7 @@ export default function AccountContent() {
 
                     <div className="text-sm">
                       <p>{item.name}</p>
-                      <p className="text-gray-500">
+                      <p className="text-black">
                         Qty: {item.quantity}
                       </p>
                     </div>
@@ -137,7 +137,7 @@ export default function AccountContent() {
           <h2 className="text-2xl font-light">Saved Items</h2>
 
           {saved.length === 0 ? (
-            <p className="mt-6 text-sm text-gray-500">
+            <p className="mt-6 text-sm text-black">
               No saved items yet.
             </p>
           ) : (
@@ -164,10 +164,10 @@ export default function AccountContent() {
 
         {/* ADDRESSES */}
         <section>
-          <h2 className="text-2xl font-light">Addresses</h2>
+          <h2 className="text-2xl text-black font-light">Addresses</h2>
 
           {addresses.length === 0 ? (
-            <div className="mt-6 border p-6 text-sm text-gray-600">
+            <div className="mt-6 border p-6 text-sm text-black">
               No addresses yet.
             </div>
           ) : (
@@ -188,7 +188,7 @@ export default function AccountContent() {
                       setEditingAddress(addr);
                       setAddressModalOpen(true);
                     }}
-                    className="underline text-sm"
+                    className="underline text-sm text-rose-700"
                   >
                     Edit
                   </button>
@@ -202,7 +202,7 @@ export default function AccountContent() {
               setEditingAddress(null);
               setAddressModalOpen(true);
             }}
-            className="mt-4 underline text-sm"
+            className="mt-4 underline text-sm text-rose-700"
           >
             Add Address
           </button>

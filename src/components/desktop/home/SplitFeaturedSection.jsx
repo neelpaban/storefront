@@ -16,7 +16,7 @@ export default function SplitFeaturedSection({ data = {} }) {
   const featureMedia = feature.media[0];
 
   return (
-    <section className="bg-rose-50 pt-8 pb-18">
+    <section className="bg-rose-50 pt-10 pb-18">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* ===== SECTION HEADING ===== */}
@@ -26,7 +26,7 @@ export default function SplitFeaturedSection({ data = {} }) {
           </h2>
 
           {subheading && (
-            <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
+            <p className="mt-5 text-gray-600 max-w-2xl mx-auto">
               {subheading}
             </p>
           )}

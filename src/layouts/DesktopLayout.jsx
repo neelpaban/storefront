@@ -6,7 +6,7 @@ export default function DesktopLayout({ children }) {
     <div className="min-h-screen flex flex-col bg-white">
 
       {/* Page Content */}
-      <main className="flex-1 overflow-y-auto pb-16">
+      <main className="bg-white">
         {children}
       </main>
 
