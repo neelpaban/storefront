@@ -98,7 +98,7 @@ export default function ProductPage() {
       <main className="bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-20 grid grid-cols-1 lg:grid-cols-[45%_55%] gap-10 lg:gap-20">
 
-          <div style={{ height: "2000px" }} className="self-start">
+          <div className="self-start lg:sticky lg:top-24">
             <ProductGallery images={images} product={product} />
           </div>
 
